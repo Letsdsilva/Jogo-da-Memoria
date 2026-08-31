@@ -1,0 +1,281 @@
+body {
+    background-color: #0B1F16;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+
+
+/* TELA INICIAL */
+
+#telaInicial {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.abertura {
+    background-color: #163D2B;
+
+    padding: 50px;
+
+    border-radius: 25px;
+
+    border: 3px solid #3FAF72;
+
+    box-shadow: 0 0 30px rgba(63, 175, 114, 0.45);
+}
+
+
+/* CÉREBRO */
+
+.icone {
+    font-size: 70px;
+
+    filter:
+        drop-shadow(0 0 5px #FF69B4)
+        drop-shadow(0 0 12px #FF69B4)
+        drop-shadow(0 0 22px rgba(255, 105, 180, 0.8));
+
+    animation: brilhoCerebro 2s ease-in-out infinite alternate;
+}
+
+
+@keyframes brilhoCerebro {
+
+    from {
+        filter:
+            drop-shadow(0 0 5px #FF69B4)
+            drop-shadow(0 0 12px #FF69B4);
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 10px #FF69B4)
+            drop-shadow(0 0 22px #FF69B4)
+            drop-shadow(0 0 35px rgba(255, 105, 180, 0.9));
+    }
+}
+
+
+/* TÍTULO */
+
+.abertura h1 {
+    color: #8FE3AD;
+
+    font-size: 40px;
+
+    text-shadow:
+        0 0 8px rgba(143, 227, 173, 0.5),
+        0 0 15px rgba(143, 227, 173, 0.25);
+}
+
+
+/* DOS INTEGRADOS */
+
+.abertura h2 {
+    color: #E6B84A;
+
+    margin-bottom: 30px;
+
+    text-shadow:
+        0 0 6px rgba(230, 184, 74, 0.45);
+}
+
+
+
+/* CAMPOS DOS NOMES */
+
+.abertura input {
+    display: block;
+
+    width: 300px;
+
+    padding: 15px;
+
+    margin: 15px auto;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+
+    border: 2px solid #3FAF72;
+
+    background-color: white;
+
+    color: #163D2B;
+
+    outline: none;
+}
+
+
+/* BOTÃO */
+
+#botaoComecar {
+    background-color: #3FAF72;
+
+    color: white;
+
+    border: 2px solid #69C98D;
+
+    padding: 18px 35px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+
+    box-shadow:
+        0 0 10px rgba(63, 175, 114, 0.5),
+        0 0 20px rgba(63, 175, 114, 0.25);
+
+    transition: 0.3s;
+}
+
+
+#botaoComecar:hover {
+    transform: scale(1.05);
+
+    background-color: #52C985;
+
+    box-shadow:
+        0 0 15px rgba(63, 175, 114, 0.8),
+        0 0 30px rgba(63, 175, 114, 0.4);
+}
+
+
+/* TELA DO JOGO */
+
+#telaJogo {
+    display: none;
+
+    padding-bottom: 40px;
+}
+
+
+#telaJogo h1 {
+    color: #8FE3AD;
+
+    text-shadow:
+        0 0 8px rgba(143, 227, 173, 0.5);
+}
+
+
+/* PAINEL DOS JOGADORES */
+
+#painelJogadores {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    margin: 20px;
+}
+
+
+.jogador {
+    background-color: #163D2B;
+
+    color: white;
+
+    padding: 15px 30px;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+
+    border: 2px solid #3FAF72;
+
+    box-shadow:
+        0 0 10px rgba(63, 175, 114, 0.4);
+}
+
+
+/* VEZ DO JOGADOR */
+
+#vezJogador {
+    color: #FFD166;
+
+    margin: 25px;
+
+    text-shadow:
+        0 0 8px rgba(255, 209, 102, 0.45);
+}
+
+
+/* ÁREA DO JOGO */
+
+.jogo {
+    display: grid;
+
+    grid-template-columns: repeat(10, 100px);
+
+    gap: 15px;
+
+    justify-content: center;
+
+    margin-top: 40px;
+}
+
+
+/* CARTAS */
+
+.carta {
+    width: 100px;
+
+    height: 120px;
+
+    background-color: #163D2B;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 40px;
+
+    cursor: pointer;
+
+    border: 2px solid #3FAF72;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 8px rgba(63, 175, 114, 0.4);
+
+    transition: 0.3s;
+}
+
+
+.carta:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 0 18px rgba(63, 175, 114, 0.7);
+}
+
+
+/* FOTOS */
+
+.carta img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jogo da Memória dos Integrados</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TELA INICIAL -->
+    <div id="telaInicial">
+
+        <div class="abertura">
+
+            <div class="icone">🧠</div>
+
+            <h1>JOGO DA MEMÓRIA</h1>
+            <h2>COMISSÕES INTEGRADAS</h2>
+
+            <input
+                type="text"
+                id="nomePlayer1"
+                placeholder="Nome do Player 1"
+            >
+
+            <input
+                type="text"
+                id="nomePlayer2"
+                placeholder="Nome do Player 2"
+            >
+
+            <button id="botaoComecar">
+                🎮 COMEÇAR JOGO
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TELA DO JOGO -->
+    <div id="telaJogo">
+
+        <h1>🧠 Jogo da Memória Comissõe Integradas</h1>
+
+        <div id="painelJogadores">
+
+            <div class="jogador">
+                👤 <span id="mostrarPlayer1"></span>
+                <br>
+                ⭐ Pontos: <span id="pontosPlayer1">0</span>
+            </div>
+
+            <div class="jogador">
+                👤 <span id="mostrarPlayer2"></span>
+                <br>
+                ⭐ Pontos: <span id="pontosPlayer2">0</span>
+            </div>
+
+        </div>
+
+
+        <h2 id="vezJogador">
+            Aguardando início...
+        </h2>
+
+
+        <div class="jogo"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
