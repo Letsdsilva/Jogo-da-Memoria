@@ -1,4 +1,3 @@
-```javascript
 const jogo = document.querySelector(".jogo");
 
 const botaoComecar = document.querySelector("#botaoComecar");
@@ -27,45 +26,199 @@ let pontos2 = 0;
 
 let paresEncontrados = 0;
 
+let primeiraCarta = null;
+let segundaCarta = null;
+let bloqueado = false;
 
-// ===============================
+
+// ==========================================
 // IMAGENS
-// ===============================
+// ==========================================
 
 const imagens = [
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto1.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto2.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto3.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto4.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto5.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto6.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto7.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto8.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto9.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto10.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto11.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto12.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto13.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto14.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto15.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto16.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto17.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto18.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto19.png",
-    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto20.png"
+    "./foto1.png",
+    "./foto2.png",
+    "./foto3.png",
+    "./foto4.png",
+    "./foto5.png",
+    "./foto6.png",
+    "./foto7.png",
+    "./foto8.png",
+    "./foto9.png",
+    "./foto10.png",
+    "./foto11.png",
+    "./foto12.png",
+    "./foto13.png",
+    "./foto14.png",
+    "./foto15.png",
+    "./foto16.png",
+    "./foto17.png",
+    "./foto18.png",
+    "./foto19.png",
+    "./foto20.png"
 ];
 
 
-// ===============================
-// COMEÇAR O JOGO
-// ===============================
+// ==========================================
+// EMBARALHAR
+// ==========================================
 
-botaoComecar.addEventListener("click", function () {
+function embaralhar(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+
+// ==========================================
+// CRIAR TABULEIRO
+// ==========================================
+
+function criarJogo() {
+
+    jogo.innerHTML = "";
+
+    primeiraCarta = null;
+    segundaCarta = null;
+    bloqueado = false;
+    paresEncontrados = 0;
+
+    const cartas = embaralhar([...imagens, ...imagens]);
+
+    cartas.forEach(function(imagem, indice) {
+
+        const carta = document.createElement("div");
+
+        carta.classList.add("carta");
+
+        carta.textContent = indice + 1;
+
+        carta.dataset.imagem = imagem;
+
+        carta.dataset.numero = indice + 1;
+
+        carta.addEventListener("click", function() {
+
+            if (bloqueado) {
+                return;
+            }
+
+            if (carta === primeiraCarta) {
+                return;
+            }
+
+            // Mostra a imagem
+            carta.innerHTML = "";
+
+            const img = document.createElement("img");
+
+            img.src = carta.dataset.imagem;
+
+            img.alt = "Foto";
+
+            carta.appendChild(img);
+
+
+            // Primeira carta
+            if (primeiraCarta === null) {
+
+                primeiraCarta = carta;
+
+                return;
+            }
+
+
+            // Segunda carta
+            segundaCarta = carta;
+
+            bloqueado = true;
+
+
+            // ==========================================
+            // ACERTOU
+            // ==========================================
+
+            if (
+                primeiraCarta.dataset.imagem ===
+                segundaCarta.dataset.imagem
+            ) {
+
+                const carta1 = primeiraCarta;
+                const carta2 = segundaCarta;
+
+                adicionarPonto();
+
+                paresEncontrados++;
+
+
+                setTimeout(function() {
+
+                    carta1.remove();
+                    carta2.remove();
+
+                    primeiraCarta = null;
+                    segundaCarta = null;
+
+                    bloqueado = false;
+
+
+                    // Verifica se terminou
+                    if (paresEncontrados === imagens.length) {
+
+                        finalizarJogo();
+
+                    }
+
+                }, 500);
+
+            }
+
+
+            // ==========================================
+            // ERROU
+            // ==========================================
+
+            else {
+
+                const carta1 = primeiraCarta;
+                const carta2 = segundaCarta;
+
+                setTimeout(function() {
+
+                    carta1.textContent = carta1.dataset.numero;
+
+                    carta2.textContent = carta2.dataset.numero;
+
+                    primeiraCarta = null;
+                    segundaCarta = null;
+
+                    bloqueado = false;
+
+                    trocarJogador();
+
+                }, 1000);
+
+            }
+
+        });
+
+        jogo.appendChild(carta);
+
+    });
+
+}
+
+
+// ==========================================
+// COMEÇAR JOGO
+// ==========================================
+
+botaoComecar.addEventListener("click", function() {
 
     player1 = nomePlayer1.value.trim();
+
     player2 = nomePlayer2.value.trim();
 
-    // Verifica se os nomes foram preenchidos
+
+    // Verifica nomes
     if (player1 === "" || player2 === "") {
 
         alert("⚠️ Por favor, preencha o nome dos dois jogadores!");
@@ -73,28 +226,47 @@ botaoComecar.addEventListener("click", function () {
         return;
     }
 
+
+    // Coloca os nomes na tela
     mostrarPlayer1.textContent = player1;
+
     mostrarPlayer2.textContent = player2;
 
-    pontosPlayer1.textContent = "0";
-    pontosPlayer2.textContent = "0";
 
+    // Zera pontuação
     pontos1 = 0;
+
     pontos2 = 0;
+
     jogadorAtual = 0;
+
     paresEncontrados = 0;
 
-    vezJogador.textContent = "🎯 Vez de: " + player1;
 
+    pontosPlayer1.textContent = "0";
+
+    pontosPlayer2.textContent = "0";
+
+
+    // Mostra jogador atual
+    atualizarVez();
+
+
+    // Troca as telas
     telaInicial.style.display = "none";
+
     telaJogo.style.display = "block";
+
+
+    // Cria o jogo
+    criarJogo();
 
 });
 
 
-// ===============================
-// ATUALIZA A VEZ
-// ===============================
+// ==========================================
+// ATUALIZAR VEZ
+// ==========================================
 
 function atualizarVez() {
 
@@ -111,9 +283,9 @@ function atualizarVez() {
 }
 
 
-// ===============================
-// TROCA O JOGADOR
-// ===============================
+// ==========================================
+// TROCAR JOGADOR
+// ==========================================
 
 function trocarJogador() {
 
@@ -132,9 +304,9 @@ function trocarJogador() {
 }
 
 
-// ===============================
-// ADICIONA PONTO
-// ===============================
+// ==========================================
+// ADICIONAR PONTO
+// ==========================================
 
 function adicionarPonto() {
 
@@ -155,163 +327,44 @@ function adicionarPonto() {
 }
 
 
-// ===============================
-// CRIA E EMBARALHA AS CARTAS
-// ===============================
+// ==========================================
+// FINALIZAR JOGO
+// ==========================================
 
-let cartas = [...imagens, ...imagens];
+function finalizarJogo() {
 
-cartas.sort(() => Math.random() - 0.5);
+    let mensagem = "";
 
 
-let primeiraCarta = null;
-let segundaCarta = null;
-let bloqueado = false;
+    if (pontos1 > pontos2) {
 
+        mensagem =
+            "🏆 PARABÉNS " +
+            player1.toUpperCase() +
+            "! VOCÊ GANHOU!";
 
-// ===============================
-// CRIA AS CARTAS
-// ===============================
+    }
 
-cartas.forEach(function (imagem, indice) {
+    else if (pontos2 > pontos1) {
 
-    const carta = document.createElement("div");
+        mensagem =
+            "🏆 PARABÉNS " +
+            player2.toUpperCase() +
+            "! VOCÊ GANHOU!";
 
-    carta.classList.add("carta");
+    }
 
-    carta.innerHTML = indice + 1;
+    else {
 
-    carta.dataset.imagem = imagem;
+        mensagem =
+            "🤝 EMPATE! OS DOIS JOGARAM MUITO BEM!";
 
-    carta.dataset.numero = indice + 1;
+    }
 
 
-    carta.addEventListener("click", function () {
+    vezJogador.textContent = mensagem;
 
-        if (bloqueado) return;
-
-        if (carta === primeiraCarta) return;
-
-
-        carta.innerHTML = `<img src="${carta.dataset.imagem}" alt="Foto">`;
-
-
-        if (primeiraCarta === null) {
-
-            primeiraCarta = carta;
-
-        } else {
-
-            segundaCarta = carta;
-
-            bloqueado = true;
-
-
-            // ===============================
-            // SE ACERTOU
-            // ===============================
-
-            if (
-                primeiraCarta.dataset.imagem ===
-                segundaCarta.dataset.imagem
-            ) {
-
-                const carta1 = primeiraCarta;
-                const carta2 = segundaCarta;
-
-
-                // Adiciona 1 ponto
-                adicionarPonto();
-
-                paresEncontrados++;
-
-
-                setTimeout(function () {
-
-                    carta1.remove();
-                    carta2.remove();
-
-
-                    // Verifica se o jogo terminou
-                    if (paresEncontrados === 20) {
-
-                        let mensagem;
-
-
-                        if (pontos1 > pontos2) {
-
-                            mensagem =
-                                "🏆 PARABÉNS " +
-                                player1.toUpperCase() +
-                                "! VOCÊ GANHOU!";
-
-                        } else if (pontos2 > pontos1) {
-
-                            mensagem =
-                                "🏆 PARABÉNS " +
-                                player2.toUpperCase() +
-                                "! VOCÊ GANHOU!";
-
-                        } else {
-
-                            mensagem =
-                                "🤝 EMPATE! OS DOIS JOGARAM MUITO BEM!";
-
-                        }
-
-
-                        vezJogador.textContent = mensagem;
-
-                    }
-
-
-                }, 500);
-
-
-                primeiraCarta = null;
-                segundaCarta = null;
-
-                bloqueado = false;
-
-
-                // Quem acertou continua jogando
-
-
-            } else {
-
-
-                // ===============================
-                // SE ERROU
-                // ===============================
-
-                const carta1 = primeiraCarta;
-                const carta2 = segundaCarta;
-
-
-                setTimeout(function () {
-
-                    carta1.innerHTML = carta1.dataset.numero;
-
-                    carta2.innerHTML = carta2.dataset.numero;
-
-                    primeiraCarta = null;
-                    segundaCarta = null;
-
-                    bloqueado = false;
-
-
-                    // Passa a vez
-                    trocarJogador();
-
-
-                }, 1000);
-
-            }
-
-        }
-
-    });
-
+}
 
     jogo.appendChild(carta);
 
