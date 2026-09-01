@@ -365,8 +365,3 @@ function finalizarJogo() {
     vezJogador.textContent = mensagem;
 
 }
-
-    jogo.appendChild(carta);
-
-});
-```
