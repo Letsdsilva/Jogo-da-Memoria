@@ -33,26 +33,26 @@ let paresEncontrados = 0;
 // ===============================
 
 const imagens = [
-    "foto1.png",
-    "foto2.png",
-    "foto3.png",
-    "foto4.png",
-    "foto5.png",
-    "foto6.png",
-    "foto7.png",
-    "foto8.png",
-    "foto9.png",
-    "foto10.png",
-    "foto11.png",
-    "foto12.png",
-    "foto13.png",
-    "foto14.png",
-    "foto15.png",
-    "foto16.png",
-    "foto17.png",
-    "foto18.png",
-    "foto19.png",
-    "foto20.png"
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto1.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto2.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto3.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto4.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto5.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto6.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto7.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto8.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto9.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto10.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto11.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto12.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto13.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto14.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto15.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto16.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto17.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto18.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto19.png",
+    "https://raw.githubusercontent.com/Letsdsilva/Jogo-da-Memoria/main/foto20.png"
 ];
 
 
