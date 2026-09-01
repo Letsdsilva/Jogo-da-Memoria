@@ -1,3 +1,4 @@
+```javascript
 const jogo = document.querySelector(".jogo");
 
 const botaoComecar = document.querySelector("#botaoComecar");
@@ -27,47 +28,50 @@ let pontos2 = 0;
 let paresEncontrados = 0;
 
 
+// ===============================
+// IMAGENS
+// ===============================
+
 const imagens = [
-    "Imagens/foto1.png",
-    "Imagens/foto2.png",
-    "Imagens/foto3.png",
-    "Imagens/foto4.png",
-    "Imagens/foto5.png",
-    "Imagens/foto6.png",
-    "Imagens/foto7.png",
-    "Imagens/foto8.png",
-    "Imagens/foto9.png",
-    "Imagens/foto10.png",
-    "Imagens/foto11.png",
-    "Imagens/foto12.png",
-    "Imagens/foto13.png",
-    "Imagens/foto14.png",
-    "Imagens/foto15.png",
-    "Imagens/foto16.png",
-    "Imagens/foto17.png",
-    "Imagens/foto18.png",
-    "Imagens/foto19.png",
-    "Imagens/foto20.png"
+    "foto1.png",
+    "foto2.png",
+    "foto3.png",
+    "foto4.png",
+    "foto5.png",
+    "foto6.png",
+    "foto7.png",
+    "foto8.png",
+    "foto9.png",
+    "foto10.png",
+    "foto11.png",
+    "foto12.png",
+    "foto13.png",
+    "foto14.png",
+    "foto15.png",
+    "foto16.png",
+    "foto17.png",
+    "foto18.png",
+    "foto19.png",
+    "foto20.png"
 ];
 
 
+// ===============================
 // COMEÇAR O JOGO
+// ===============================
 
-botaoComecar.addEventListener("click", function() {
+botaoComecar.addEventListener("click", function () {
 
     player1 = nomePlayer1.value.trim();
     player2 = nomePlayer2.value.trim();
 
-
-    // VERIFICA SE OS NOMES FORAM PREENCHIDOS
-
+    // Verifica se os nomes foram preenchidos
     if (player1 === "" || player2 === "") {
 
         alert("⚠️ Por favor, preencha o nome dos dois jogadores!");
 
         return;
     }
-
 
     mostrarPlayer1.textContent = player1;
     mostrarPlayer2.textContent = player2;
@@ -88,7 +92,9 @@ botaoComecar.addEventListener("click", function() {
 });
 
 
+// ===============================
 // ATUALIZA A VEZ
+// ===============================
 
 function atualizarVez() {
 
@@ -105,7 +111,9 @@ function atualizarVez() {
 }
 
 
+// ===============================
 // TROCA O JOGADOR
+// ===============================
 
 function trocarJogador() {
 
@@ -124,7 +132,9 @@ function trocarJogador() {
 }
 
 
+// ===============================
 // ADICIONA PONTO
+// ===============================
 
 function adicionarPonto() {
 
@@ -145,7 +155,9 @@ function adicionarPonto() {
 }
 
 
+// ===============================
 // CRIA E EMBARALHA AS CARTAS
+// ===============================
 
 let cartas = [...imagens, ...imagens];
 
@@ -157,9 +169,11 @@ let segundaCarta = null;
 let bloqueado = false;
 
 
+// ===============================
 // CRIA AS CARTAS
+// ===============================
 
-cartas.forEach(function(imagem, indice) {
+cartas.forEach(function (imagem, indice) {
 
     const carta = document.createElement("div");
 
@@ -172,7 +186,7 @@ cartas.forEach(function(imagem, indice) {
     carta.dataset.numero = indice + 1;
 
 
-    carta.addEventListener("click", function() {
+    carta.addEventListener("click", function () {
 
         if (bloqueado) return;
 
@@ -193,7 +207,9 @@ cartas.forEach(function(imagem, indice) {
             bloqueado = true;
 
 
+            // ===============================
             // SE ACERTOU
+            // ===============================
 
             if (
                 primeiraCarta.dataset.imagem ===
@@ -204,21 +220,19 @@ cartas.forEach(function(imagem, indice) {
                 const carta2 = segundaCarta;
 
 
-                // ADICIONA 1 PONTO
-
+                // Adiciona 1 ponto
                 adicionarPonto();
 
                 paresEncontrados++;
 
 
-                setTimeout(function() {
+                setTimeout(function () {
 
                     carta1.remove();
                     carta2.remove();
 
 
-                    // VERIFICA SE O JOGO TERMINOU
-
+                    // Verifica se o jogo terminou
                     if (paresEncontrados === 20) {
 
                         let mensagem;
@@ -260,21 +274,24 @@ cartas.forEach(function(imagem, indice) {
                 bloqueado = false;
 
 
-                // QUEM ACERTOU CONTINUA JOGANDO
+                // Quem acertou continua jogando
 
 
             } else {
 
 
+                // ===============================
                 // SE ERROU
+                // ===============================
 
                 const carta1 = primeiraCarta;
                 const carta2 = segundaCarta;
 
 
-                setTimeout(function() {
+                setTimeout(function () {
 
                     carta1.innerHTML = carta1.dataset.numero;
+
                     carta2.innerHTML = carta2.dataset.numero;
 
                     primeiraCarta = null;
@@ -283,8 +300,7 @@ cartas.forEach(function(imagem, indice) {
                     bloqueado = false;
 
 
-                    // PASSA A VEZ
-
+                    // Passa a vez
                     trocarJogador();
 
 
@@ -300,3 +316,4 @@ cartas.forEach(function(imagem, indice) {
     jogo.appendChild(carta);
 
 });
+```
